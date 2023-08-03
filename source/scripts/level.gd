@@ -2,11 +2,14 @@ extends Node2D
 
 var bullet:PackedScene = preload("res://source/scenes/bullet.tscn")
 
-#var enemy:PackedScene = preload("res://source/scenes/enemy.tscn")
+var enemy:PackedScene = preload("res://source/scenes/enemy.tscn")
 
 func _ready():
 	$player.connect("shootSignal", Callable(self, "playerShoot"))
 	SignalBus.connect("bulletCollision", handle_bulletHit)
+	var enemy_instance = enemy.instantiate()
+	add_child(enemy_instance)
+	
 	
 	
 func playerShoot():
@@ -19,6 +22,7 @@ func spawnBullet():
 	
 	$projectileContainer.add_child(bulletInstance)
 	
-func handle_bulletHit():
+func handle_bulletHit(body, bullet_damage):
 	print("handle_bulletHit")
-	SignalBus.damage_enemy.emit()
+	if body.is_in_group("enemy"):
+		SignalBus.damage_enemy.emit(bullet_damage)

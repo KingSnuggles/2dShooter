@@ -4,6 +4,6 @@ extends Node
 func _ready():
 	print("signalbus")
 
-signal bulletCollision
+signal bulletCollision(body, bullet_damage)
 
-signal damage_enemy
+signal damage_enemy(bullet_damage)

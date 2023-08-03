@@ -1,6 +1,7 @@
 extends Area2D
 
 var speed = 750
+var bullet_damage:int = 20
 
 func _ready():
 	$".".body_entered.connect(handle_body_entered)
@@ -10,8 +11,8 @@ func _ready():
 func _physics_process(delta):
 	position += transform.x * speed * delta
 
-func handle_body_entered(_body):
-	SignalBus.bulletCollision.emit()
+func handle_body_entered(body):
+	SignalBus.bulletCollision.emit(body, bullet_damage)
 	despawnBullet()
 
 func despawnBullet():
