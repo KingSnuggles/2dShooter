@@ -6,4 +6,4 @@ func _ready():
 
 signal bulletCollision(body, bullet_damage)
 
-signal damage_enemy(bullet_damage)
+signal damage_enemy(body, bullet_damage)

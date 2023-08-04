@@ -20,8 +20,8 @@ func move_towards_player(delta):
 	move_and_slide()
 #	look_at(player.position)
 
-func handle_damage_enemy(damage:int = 10):
+func handle_damage_enemy(body, damage:int = 10):
 	enemy_health = enemy_health - damage
 	if enemy_health == 0:
-		queue_free()
+		body.queue_free()
 	print("handle_damage_enemy")
