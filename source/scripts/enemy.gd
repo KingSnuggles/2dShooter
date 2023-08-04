@@ -1,7 +1,7 @@
-extends Area2D
+extends CharacterBody2D
 
 var enemy_health:int = 40
-var enemy_speed:int = 50
+var enemy_speed:float = 30
 var player
 
 
@@ -11,8 +11,14 @@ func _ready():
 	player = get_node("../player")
 	
 func _process(delta):
-	position = position.move_toward(player.position,enemy_speed * delta)
+	move_towards_player(delta)
 	
+
+func move_towards_player(delta):
+	var dir = player.position - global_position
+	velocity = dir * enemy_speed * delta
+	move_and_slide()
+#	look_at(player.position)
 
 func handle_damage_enemy(damage:int = 10):
 	enemy_health = enemy_health - damage
